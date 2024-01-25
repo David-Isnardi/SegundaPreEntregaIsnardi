@@ -1,0 +1,22 @@
+{
+  "name": "segunda-pre-entrega",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "keywords": [],
+  "author": "David Isnardi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "mongoose": "^7.3.1",
+    "mongoose-paginate-v2": "^1.7.1",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.6.2"
+  }
+}
