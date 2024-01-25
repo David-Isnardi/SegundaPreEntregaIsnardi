@@ -5,7 +5,6 @@ import productsRouter from './routers/products.router.js'
 import cartsRouter from './routers/carts.router.js'
 import viewsRouter from './routers/views.router.js'
 import mongoose from 'mongoose'
-import Message from './dao/models/message.model.js'
 
 const PORT = 8080; // puerto en el que va a escuchar el servidor
 
@@ -42,38 +41,6 @@ try {
         console.log('Nuevo cliente conectado!')
 
         socket.broadcast.emit('Alerta');
-
-        // Cargar los mensajes almacenados en la base de datos
-        Message.find()
-          .then(messages => {
-            socket.emit('messages', messages); 
-          })
-          .catch(error => {
-            console.log(error.message);
-          });
-    
-        socket.on('message', data => {
-          // Guardar el mensaje en la base de datos
-          const newMessage = new Message({
-            user: data.user,
-            message: data.message
-          });
-    
-          newMessage.save()
-            .then(() => {
-              // Emitir el evento messages con los mensajes actualizados de la base de datos
-              Message.find()
-                .then(messages => {
-                  io.emit('messages', messages);
-                })
-                .catch(error => {
-                  console.log(error.message);
-                });
-            })
-            .catch(error => {
-              console.log(error.message);
-            });
-        });
 
         socket.on('productList', async (data) => { 
             io.emit('updatedProducts', data ) // emite el evento updatedProducts con la lista de productos
